@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+
+	<constant name="struts.devMode" value="true" />
+
+	<package name="default" extends="struts-default">
+		<action name="Home">
+			<result>index.jsp</result>
+		</action>
+		<action name="Profile">
+			<result>/profile.jsp</result>
+		</action>
+		<action name="login">
+			<result>/login.jsp</result>
+		</action>
+		<action name="loginprocess" class="abcjobs.action.LoginAction">
+		<result name="login">/loginsuccess.jsp</result> 
+		<result name="error">/loginerror.jsp</result> 
+		</action>
+		<action name="logout" class="abcjobs.action.LoginAction" method="logout">
+		<result name="success" >logoutsuccess.jsp</result>
+		</action>
+		<action name="registerUser">
+			<result>/register.jsp</result>
+		</action>
+		<action name="register" class="abcjobs.action.RegisterAction">
+			<result name="REGSUCCESS">/thanksregister.jsp</result>
+			<result name="REGERROR">/register.jsp</result>
+		</action>
+		<action name="report" class="abcjobs.action.FetchData">
+			<result name="REPORT">/viewusers.jsp</result>
+			<result name="loginfirst">/login.jsp</result>
+		</action>
+		<action name="updatedetails" class="abcjobs.action.UpdateAction">
+			<result name="UPDATE" type ="chain">report</result>
+		</action>
+		<!-- Post logIN -->
+		<action name="logHome">
+			<result>/loginindex.jsp</result>
+		</action>
+		<action name="logProfile" class="abcjobs.action.FetchData">
+			<result name="REPORT">/viewusers.jsp</result>
+		</action>
+		<action name="searchUser" class="abcjobs.action.SearchAction">
+			<result name="search">/searchlist.jsp</result>
+		</action>
+		
+		<action name="updateprofile" class="abcjobs.action.FetchData">
+			<result name="REPORT">/edituser.jsp</result>
+		</action>
+		<action name ="forgetpass">
+		<result>/forgotest.jsp</result>
+		</action>
+		<action name="forgot" class="abcjobs.action.EmailAction">
+		<result name="success">/otp.jsp</result>
+		<result name="error">/forgotest.jsp</result>
+		</action>
+		<action name="otpverify" class="abcjobs.action.OtpAction">
+		<result name="otpsent">/passreset.jsp</result>
+		<result name="error">/forgotest.jsp</result>
+		</action>
+		<action name="updatePass" class="abcjobs.action.PassResetAction">
+		<result name="updatepass">/passresetsuccess.jsp</result>
+		<result name="Failure">/passreset.jsp</result>
+		
+		</action>
+		<action name="searchProfile" class="abcjobs.action.SearchProfileAction">
+			<result name = "searched">/searchprofile.jsp</result>
+		</action>
+		<!-- Admin -->
+		<action name="adminlogin">
+		<result>/adminlogin.jsp</result>
+		</action>
+		<action name="adminloginprocess" class="abcjobs.action.adminAction">
+		<result name= "login">/adminHome.jsp</result>
+		<result name="error" type="chain">adminlogin</result>
+		</action>
+		<action name="deleterecord" class="abcjobs.action.DeleteAction">
+			<result name="DELETE">/deleteuser.jsp</result>
+		</action>
+		<action name="adminrep" class="abcjobs.action.AdminFetchData">
+			<result name="adView">/adminProfile.jsp</result>
+			<result name="login">/adminlogin.jsp</result>
+		</action>
+		
+	</package>
+</struts>
